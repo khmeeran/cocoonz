@@ -1,0 +1,452 @@
+/* ========================================
+   ADMIN PANEL — Teacher Portal Styles
+   ======================================== */
+
+.admin-body {
+    background: var(--grey-light);
+    min-height: 100vh;
+}
+
+/* Login Page */
+.admin-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient(160deg, var(--blue-pale) 0%, var(--yellow-pale) 50%, var(--mint-pale) 100%);
+}
+
+.admin-login-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-xl);
+    padding: 48px;
+    max-width: 440px;
+    width: 100%;
+    animation: fadeUp 0.6s ease;
+}
+
+.admin-login-header {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.admin-login-header .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.admin-login-header .logo-icon {
+    font-size: 2.5rem;
+}
+
+.admin-login-header .logo-text {
+    font-family: var(--h-font);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+.admin-login-header h1 {
+    font-family: var(--h-font);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.admin-login-header p {
+    color: var(--text-mid);
+    font-size: 0.95rem;
+}
+
+.admin-login-form .form-group {
+    margin-bottom: 20px;
+}
+
+.admin-login-form label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.admin-login-form input[type="text"],
+.admin-login-form input[type="password"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--grey);
+    border-radius: var(--r-sm);
+    font-family: var(--b-font);
+    font-size: 1rem;
+    transition: var(--ease);
+}
+
+.admin-login-form input:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(93,173,226,0.15);
+}
+
+.error-message {
+    background: #fee;
+    color: #c33;
+    padding: 12px;
+    border-radius: var(--r-sm);
+    border: 1px solid #fcc;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+}
+
+.btn-admin-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    color: var(--white);
+    border: none;
+    border-radius: var(--r-sm);
+    font-family: var(--h-font);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--ease);
+    box-shadow: 0 6px 20px rgba(93,173,226,0.40);
+    width: 100%;
+}
+
+.btn-admin-primary:hover {
+    box-shadow: 0 10px 32px rgba(93,173,226,0.55);
+    transform: translateY(-2px);
+}
+
+.btn-admin-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--white);
+    color: var(--text-dark);
+    border: 2px solid var(--grey);
+    border-radius: var(--r-sm);
+    font-family: var(--h-font);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--ease);
+}
+
+.btn-admin-outline:hover {
+    border-color: var(--blue);
+    color: var(--blue-dark);
+}
+
+.admin-login-footer {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--grey);
+}
+
+.admin-login-footer p {
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+/* Dashboard */
+.admin-dashboard {
+    min-height: 100vh;
+}
+
+.admin-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--grey);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.admin-header-left .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-header-center h1 {
+    font-family: var(--h-font);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.admin-header-right {
+    display: flex;
+    gap: 12px;
+}
+
+.admin-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+
+.admin-section {
+    background: var(--white);
+    border-radius: var(--r-md);
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-sm);
+}
+
+.section-header {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.section-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--h-font);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.section-header p {
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.photo-count {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* Upload Zone */
+.upload-zone {
+    border: 2px dashed var(--grey);
+    border-radius: var(--r-md);
+    padding: 60px 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--ease);
+    background: var(--grey-light);
+}
+
+.upload-zone:hover,
+.upload-zone.dragover {
+    border-color: var(--blue);
+    background: var(--blue-pale);
+}
+
+.upload-zone-content svg {
+    margin-bottom: 16px;
+    stroke: var(--text-light);
+}
+
+.upload-zone-content h3 {
+    font-family: var(--h-font);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.upload-zone-content p {
+    color: var(--text-mid);
+    margin-bottom: 20px;
+}
+
+.upload-hint {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* Upload Progress */
+.upload-progress {
+    margin-top: 24px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.progress-bar {
+    height: 8px;
+    background: var(--grey);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--mint));
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    width: 0;
+}
+
+/* Upload Preview */
+.upload-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.preview-item {
+    position: relative;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    aspect-ratio: 1;
+    border: 2px solid var(--grey);
+}
+
+.preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-item .remove-preview {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: var(--ease);
+}
+
+.preview-item .remove-preview:hover {
+    background: rgba(200,0,0,0.8);
+}
+
+/* Admin Gallery Grid */
+.admin-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.admin-photo-card {
+    position: relative;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    border: 2px solid var(--grey);
+    background: var(--grey-light);
+    transition: var(--ease);
+}
+
+.admin-photo-card:hover {
+    border-color: var(--blue);
+    box-shadow: var(--shadow-md);
+}
+
+.admin-photo-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.admin-photo-actions {
+    padding: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.btn-delete-photo {
+    flex: 1;
+    padding: 8px;
+    background: #fee;
+    color: #c33;
+    border: 1px solid #fcc;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: var(--ease);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-delete-photo:hover {
+    background: #fcc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-login-card {
+        padding: 32px 24px;
+    }
+    
+    .admin-header {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .admin-header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .admin-content {
+        padding: 24px 16px;
+    }
+    
+    .admin-section {
+        padding: 24px 16px;
+    }
+    
+    .upload-zone {
+        padding: 40px 20px;
+    }
+    
+    .admin-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+    
+    .admin-photo-card img {
+        height: 150px;
+    }
+}

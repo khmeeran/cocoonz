@@ -1,0 +1,754 @@
+/* ========================================
+   COCOONZ NEXTGEN — Primary School Styles
+   ======================================== */
+
+/* Section Label Gradient Variant */
+.section-label--gradient {
+    background: linear-gradient(135deg, var(--blue), var(--mint));
+    color: var(--white);
+    border: none;
+}
+.section-label--gradient::before {
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+}
+.section-label--mint {
+    color: #1E8449;
+    background: var(--mint-pale);
+    border-color: var(--mint);
+}
+.section-label--mint::before {
+    background: var(--mint-dark);
+    box-shadow: 0 0 0 3px rgba(169,223,191,0.35);
+}
+.section-label--yellow {
+    color: var(--yellow-dark);
+    background: var(--yellow-pale);
+    border-color: var(--yellow);
+}
+.section-label--yellow::before {
+    background: var(--yellow);
+    box-shadow: 0 0 0 3px rgba(247,220,111,0.35);
+}
+
+/* ========================================
+   NEXTGEN HERO
+   ======================================== */
+.nextgen-hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+/* Hero Video Background */
+.nextgen-hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    opacity: 0.2;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.nextgen-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(ellipse 600px 400px at 20% 50%, rgba(93,173,226,0.15), transparent),
+        radial-gradient(ellipse 500px 350px at 80% 30%, rgba(169,223,191,0.1), transparent),
+        radial-gradient(ellipse 400px 300px at 50% 80%, rgba(247,220,111,0.08), transparent);
+    z-index: 1;
+}
+
+.nextgen-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+    z-index: 2;
+}
+
+.nextgen-hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 850px;
+    padding: 100px 24px 80px;
+    animation: fadeUp 1s ease forwards;
+}
+
+.nextgen-hero-content h1 {
+    font-family: var(--h-font);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 24px;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+}
+
+.nextgen-hero-subtitle {
+    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+    color: rgba(255,255,255,0.85);
+    max-width: 650px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+.nextgen-hero-ctas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.nextgen-hero .btn-outline {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.95);
+}
+.nextgen-hero .btn-outline:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: var(--blue);
+    color: var(--white);
+}
+.nextgen-hero .btn-outline svg {
+    stroke: rgba(255,255,255,0.95);
+}
+
+/* ========================================
+   PHILOSOPHY SECTION
+   ======================================== */
+.nextgen-philosophy {
+    padding: 100px 0;
+    background: var(--white);
+}
+
+.nextgen-philosophy-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.nextgen-philosophy-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-mid);
+    margin-top: 12px;
+}
+
+.nextgen-philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.nextgen-philosophy-card {
+    background: var(--grey-light);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: var(--ease);
+}
+
+.nextgen-philosophy-card:hover {
+    border-color: var(--blue-light);
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+}
+
+.nextgen-philosophy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.nextgen-philosophy-card h3 {
+    font-family: var(--h-font);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.nextgen-philosophy-card p {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+}
+
+/* ========================================
+   ASSESSMENT SECTION
+   ======================================== */
+.nextgen-assessment {
+    padding: 100px 0;
+    background: linear-gradient(160deg, var(--blue-pale) 0%, var(--mint-pale) 100%);
+}
+
+.nextgen-assessment-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.nextgen-assessment-text .section-label {
+    margin-bottom: 16px;
+}
+
+.nextgen-assessment-text .section-title {
+    margin-bottom: 16px;
+}
+
+.nextgen-assessment-text > p {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 32px;
+}
+
+.nextgen-assessment-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.nextgen-assessment-feature {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.nextgen-assessment-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.nextgen-assessment-feature h4 {
+    font-family: var(--h-font);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.nextgen-assessment-feature p {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+}
+
+.nextgen-assessment-visual {
+    display: flex;
+    justify-content: center;
+}
+
+.nextgen-assessment-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-md);
+    max-width: 380px;
+}
+
+.nextgen-assessment-card-icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.nextgen-assessment-card h3 {
+    font-family: var(--h-font);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.nextgen-assessment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nextgen-assessment-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--grey);
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.nextgen-assessment-list li:last-child {
+    border-bottom: none;
+}
+
+.nextgen-assessment-bullet {
+    width: 8px;
+    height: 8px;
+    background: var(--blue);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* ========================================
+   CURRICULUM SECTION
+   ======================================== */
+.nextgen-curriculum {
+    padding: 100px 0;
+    background: var(--white);
+}
+
+.nextgen-curriculum-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.nextgen-curriculum-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    margin-top: 12px;
+}
+
+.nextgen-curriculum-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.nextgen-curriculum-card {
+    background: var(--grey-light);
+    border-radius: var(--r-lg);
+    padding: 28px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: var(--ease);
+    position: relative;
+}
+
+.nextgen-curriculum-card:hover {
+    border-color: var(--blue);
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+}
+
+.nextgen-curriculum-card.featured {
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    color: var(--white);
+    border: none;
+}
+
+.nextgen-curriculum-card.featured h3,
+.nextgen-curriculum-card.featured p,
+.nextgen-curriculum-card.featured li {
+    color: var(--white);
+}
+
+.nextgen-curriculum-card.featured .nextgen-curriculum-features li {
+    border-color: rgba(255,255,255,0.2);
+}
+
+.nextgen-curriculum-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.nextgen-curriculum-card h3 {
+    font-family: var(--h-font);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.nextgen-curriculum-card p {
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.nextgen-curriculum-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.nextgen-curriculum-features li {
+    padding: 6px 0;
+    font-size: 0.82rem;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--grey);
+}
+
+.nextgen-curriculum-features li:last-child {
+    border-bottom: none;
+}
+
+.nextgen-curriculum-features li::before {
+    content: '✓ ';
+    color: var(--mint-dark);
+    font-weight: bold;
+}
+
+/* ========================================
+   ENRICHMENT SECTION
+   ======================================== */
+.nextgen-enrichment {
+    padding: 100px 0;
+    background: var(--grey-light);
+}
+
+.nextgen-enrichment-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.nextgen-enrichment-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    margin-top: 12px;
+}
+
+.nextgen-enrichment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.nextgen-enrichment-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: var(--ease);
+}
+
+.nextgen-enrichment-card:hover {
+    border-color: var(--mint);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+}
+
+.nextgen-enrichment-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.nextgen-enrichment-card h3 {
+    font-family: var(--h-font);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.nextgen-enrichment-card p {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+}
+
+/* ========================================
+   LEARNING PHILOSOPHY
+   ======================================== */
+.nextgen-learning-philosophy {
+    padding: 100px 0;
+    background: var(--white);
+}
+
+.nextgen-learning-philosophy-content {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.nextgen-learning-philosophy .section-label {
+    margin-bottom: 16px;
+}
+
+.nextgen-learning-philosophy .section-title {
+    margin-bottom: 48px;
+}
+
+.nextgen-learning-pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.nextgen-learning-pillar {
+    text-align: center;
+}
+
+.nextgen-learning-pillar-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.nextgen-learning-pillar h3 {
+    font-family: var(--h-font);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.nextgen-learning-pillar p {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+}
+
+/* ========================================
+   WORLD-CLASS ENVIRONMENT
+   ======================================== */
+.nextgen-environment {
+    padding: 100px 0;
+    background: linear-gradient(160deg, var(--yellow-pale) 0%, var(--blue-pale) 100%);
+}
+
+.nextgen-environment-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.nextgen-environment-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    margin-top: 12px;
+}
+
+.nextgen-environment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.nextgen-environment-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: var(--ease);
+}
+
+.nextgen-environment-card:hover {
+    border-color: var(--yellow);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+}
+
+.nextgen-environment-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.nextgen-environment-card h3 {
+    font-family: var(--h-font);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.nextgen-environment-card p {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+}
+
+/* ========================================
+   TIMINGS SECTION
+   ======================================== */
+.nextgen-timings {
+    padding: 100px 0;
+    background: var(--white);
+}
+
+.nextgen-timings-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.nextgen-timings .section-label {
+    margin-bottom: 16px;
+}
+
+.nextgen-timings .section-title {
+    margin-bottom: 40px;
+}
+
+.nextgen-timings-card {
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    border-radius: var(--r-lg);
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    box-shadow: var(--shadow-lg);
+    color: var(--white);
+}
+
+.nextgen-timings-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.nextgen-timings-details h3 {
+    font-family: var(--h-font);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+}
+
+.nextgen-timings-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.nextgen-timings-start,
+.nextgen-timings-end {
+    font-family: var(--h-font);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--white);
+}
+
+.nextgen-timings-divider {
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.5);
+}
+
+.nextgen-timings-note {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.85);
+}
+
+/* ========================================
+   CONTACT SECTION
+   ======================================== */
+.nextgen-contact {
+    padding: 100px 0;
+    background: linear-gradient(160deg, var(--mint-pale) 0%, var(--yellow-pale) 100%);
+}
+
+.nextgen-contact-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.nextgen-contact .section-label {
+    margin-bottom: 16px;
+}
+
+.nextgen-contact .section-title {
+    margin-bottom: 16px;
+}
+
+.nextgen-contact-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-mid);
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+.nextgen-contact-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 1024px) {
+    .nextgen-curriculum-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .nextgen-learning-pillars {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .nextgen-hero {
+        min-height: 80vh;
+    }
+    .nextgen-hero-video {
+        display: none;
+    }
+    .nextgen-hero {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    }
+    .nextgen-hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .nextgen-philosophy-grid,
+    .nextgen-enrichment-grid,
+    .nextgen-environment-grid {
+        grid-template-columns: 1fr;
+    }
+    .nextgen-curriculum-grid {
+        grid-template-columns: 1fr;
+    }
+    .nextgen-assessment-content {
+        grid-template-columns: 1fr;
+    }
+    .nextgen-timings-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .nextgen-contact-buttons {
+        flex-direction: column;
+    }
+    .nextgen-contact-buttons .btn {
+        width: 100%;
+    }
+    .nextgen-hero-ctas {
+        flex-direction: column;
+    }
+    .nextgen-hero-ctas .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .nextgen-learning-pillars {
+        grid-template-columns: 1fr;
+    }
+    .nextgen-timings-start,
+    .nextgen-timings-end {
+        font-size: 1.4rem;
+    }
+}

@@ -1,0 +1,20 @@
+# Ignore large image files in root directory
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.svg
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Node modules
+node_modules/
+.vercel/
+.qwen/
+
+# Documentation
+README.md
+GALLERY-README.md
