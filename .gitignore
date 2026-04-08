@@ -4,6 +4,10 @@ node_modules/
 dist/
 build/
 
+# Large video files (exceeds GitHub 100MB limit)
+cocoonz.mp4
+Cocoonz_activities.mp4
+
 # OS files
 .DS_Store
 Thumbs.db
