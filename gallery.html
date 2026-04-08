@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore life at Cocoonz through photos — learning, play, celebrations and precious childhood moments.">
+    <title>Gallery — Cocoonz | Capturing Childhood Moments</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gallery-page.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦋</text></svg>">
+</head>
+<body>
+
+    <!-- ========== STICKY HEADER ========== -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🦋</span>
+                <span class="logo-text">Cocoonz</span>
+            </a>
+            <nav class="nav" id="nav">
+                <a href="index.html#about">About</a>
+                <a href="index.html#programs">Programs</a>
+                <a href="nextgen.html">NextGen Primary</a>
+                <a href="index.html#facilities">Facilities</a>
+                <a href="gallery.html" class="active">Gallery</a>
+                <a href="index.html#locations">Locations</a>
+                <a href="index.html#contact">Contact</a>
+                <a href="index.html#contact" class="nav-cta">Book a Visit</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ========== MOBILE MENU ========== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">&times;</button>
+        <a href="index.html#about" class="mobile-menu-link">About</a>
+        <a href="index.html#programs" class="mobile-menu-link">Programs</a>
+        <a href="nextgen.html" class="mobile-menu-link">NextGen Primary</a>
+        <a href="index.html#facilities" class="mobile-menu-link">Facilities</a>
+        <a href="gallery.html" class="mobile-menu-link active">Gallery</a>
+        <a href="index.html#locations" class="mobile-menu-link">Locations</a>
+        <a href="index.html#contact" class="mobile-menu-link">Contact</a>
+        <a href="index.html#contact" class="mobile-menu-cta">Book a Visit</a>
+    </div>
+
+    <!-- ========== HERO BANNER ========== -->
+    <section class="page-hero">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <div class="section-label">Our Gallery</div>
+            <h1>Capturing Childhood ✨</h1>
+            <p>Every smile, every discovery, every precious moment — frozen in time</p>
+        </div>
+    </section>
+
+    <!-- ========== MASONRY GALLERY ========== -->
+    <section class="gallery-full">
+        <div class="container">
+            <!-- Filter Tabs -->
+            <div class="gallery-filters">
+                <button class="gallery-filter active" data-filter="all">All Moments</button>
+                <button class="gallery-filter" data-filter="learning">Learning</button>
+                <button class="gallery-filter" data-filter="play">Play</button>
+                <button class="gallery-filter" data-filter="art">Art & Creativity</button>
+                <button class="gallery-filter" data-filter="celebrations">Celebrations</button>
+            </div>
+
+            <!-- Masonry Grid -->
+            <div class="masonry-grid" id="galleryGrid">
+                <!-- Images will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== LIGHTBOX ========== -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-prev" id="lightboxPrev">&#8249;</button>
+        <button class="lightbox-next" id="lightboxNext">&#8250;</button>
+        <img src="" alt="" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <!-- ========== CTA SECTION ========== -->
+    <section class="gallery-cta">
+        <div class="container">
+            <div class="gallery-cta-content">
+                <h2>Want to See Cocoonz in Person?</h2>
+                <p>Visit us and experience the magic firsthand. We'd love to show you around!</p>
+                <a href="index.html#contact" class="btn btn-primary btn-lg">
+                    <span>Book a Visit</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">🦋</span>
+                        <span class="logo-text">Cocoonz</span>
+                    </a>
+                    <p>Premium Early Childhood Development Centre</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#programs">Programs</a>
+                    <a href="index.html#facilities">Facilities</a>
+                    <a href="gallery.html">Gallery</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Programs</h4>
+                    <a href="index.html#programs">Pre-KG</a>
+                    <a href="index.html#programs">LKG</a>
+                    <a href="index.html#programs">UKG</a>
+                    <a href="index.html#programs">Grade 1</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Get in Touch</h4>
+                    <p>📞 +91 98765 43210</p>
+                    <p>📧 hello@cocoonz.com</p>
+                    <p>📍 4 Branches Across India</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Cocoonz. All rights reserved. Made with 💛 for little minds.</p>
+                <p class="footer-note">
+                    Designed & powered by 
+                    <a href="https://krneospark.com" target="_blank" rel="noopener" class="footer-brand-link">
+                        <span class="neospark-icon">⚡</span>
+                        <span class="neospark-text">KR Neospark</span>
+                    </a>
+                    — Where ideas become reality.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>
