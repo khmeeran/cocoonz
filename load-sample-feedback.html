@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Sample Feedback</title>
+</head>
+<body>
+    <h1>Loading Sample Feedback Data...</h1>
+    <script>
+        const feedbacks = [
+            {
+                id: 1,
+                parentName: 'Meera R',
+                childName: 'Arjun',
+                branch: 'akshaya',
+                program: 'lkg',
+                rating: 5,
+                category: 'teachers',
+                feedbackTitle: 'Wonderful teachers and caring environment',
+                feedbackText: 'My son Arjun has been attending Cocoonz for 6 months now, and the transformation is remarkable. The teachers are incredibly caring and patient. He comes home every day excited to share what he learned. The communication between school and parents is excellent - I always know what he is working on. Highly recommend to all parents looking for quality early education.',
+                date: '2026-03-15T10:30:00.000Z'
+            },
+            {
+                id: 2,
+                parentName: 'Karthik S',
+                childName: 'Priya',
+                branch: 'spkovil',
+                program: 'ukg',
+                rating: 5,
+                category: 'curriculum',
+                feedbackTitle: 'Excellent curriculum and activities',
+                feedbackText: 'The theme-based learning approach is fantastic. My daughter Priya learned about oceans last month and now she knows more about marine life than I do! The activities are well-planned and engaging. She has developed strong reading habits and loves showing us her worksheets. The teachers really know how to make learning fun and meaningful.',
+                date: '2026-03-10T14:20:00.000Z'
+            },
+            {
+                id: 3,
+                parentName: 'Deepa M',
+                childName: 'Rohan',
+                branch: 'maraimalai',
+                program: 'prekg',
+                rating: 4,
+                category: 'facilities',
+                feedbackTitle: 'Safe and well-maintained facilities',
+                feedbackText: 'The campus is clean, safe, and child-friendly. I appreciate the CCTV monitoring and the security measures in place. The classrooms are colorful and engaging. My only suggestion would be to have a slightly larger play area, but overall the facilities are very good and well-maintained. Rohan loves going to school every day!',
+                date: '2026-03-05T09:15:00.000Z'
+            },
+            {
+                id: 4,
+                parentName: 'Sanjay P',
+                childName: 'Anu',
+                branch: 'siruseri',
+                program: 'grade1',
+                rating: 5,
+                category: 'overall',
+                feedbackTitle: 'Best decision for our child education',
+                feedbackText: 'Moving our daughter to Cocoonz NextGen Primary was the best decision we made. The transition from UKG to Grade 1 was seamless. The STEM labs are impressive, and the teachers are committed to every child success. Anu has grown so confident in just a few months. The parent-teacher meetings are regular and very helpful.',
+                date: '2026-02-28T16:45:00.000Z'
+            },
+            {
+                id: 5,
+                parentName: 'Lakshmi K',
+                childName: 'Vikram',
+                branch: 'singaperumalkoil',
+                program: 'lkg',
+                rating: 5,
+                category: 'communication',
+                feedbackTitle: 'Great parent communication and updates',
+                feedbackText: 'I love the daily photo updates and progress reports. As a working mother, it gives me peace of mind to see what Vikram is doing at school. The teachers respond quickly to any questions I have. The WhatsApp updates are a wonderful touch. I always feel connected and informed about my child day.',
+                date: '2026-02-20T11:30:00.000Z'
+            },
+            {
+                id: 6,
+                parentName: 'Ramesh T',
+                childName: 'Sneha',
+                branch: 'akshaya',
+                program: 'ukg',
+                rating: 4,
+                category: 'overall',
+                feedbackTitle: 'Well rounded development approach',
+                feedbackText: 'Sneha has developed so much in terms of social skills and confidence. The yoga and music sessions are great additions. She has learned good manners and even helps me organize things at home! The field trips are educational and fun. My suggestion is to have more outdoor activities, but overall we are very happy with Cocoonz.',
+                date: '2026-02-15T13:00:00.000Z'
+            }
+        ];
+
+        localStorage.setItem('cocoonz_parent_feedbacks', JSON.stringify(feedbacks));
+        document.body.innerHTML = '<h1 style="text-align:center;margin-top:50px;color:#27ae60;">✓ Sample Feedback Loaded Successfully!</h1><p style="text-align:center;font-size:1.1rem;">You can now close this tab and view the main website.</p>';
+    </script>
+</body>
+</html>

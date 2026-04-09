@@ -50,6 +50,12 @@
     color: var(--text-dark);
 }
 
+.admin-login-header .logo-image {
+    max-height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
 .admin-login-header h1 {
     font-family: var(--h-font);
     font-size: 1.6rem;
@@ -183,6 +189,97 @@
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.admin-header-left .logo-image {
+    max-height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Admin Tabs */
+.admin-tabs {
+    display: flex;
+    gap: 12px;
+    padding: 0 32px;
+    background: var(--white);
+    border-bottom: 2px solid var(--grey);
+}
+
+.admin-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-family: var(--h-font);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: var(--ease);
+}
+
+.admin-tab:hover {
+    color: var(--text-dark);
+    background: var(--grey-light);
+}
+
+.admin-tab.active {
+    color: var(--blue-dark);
+    border-bottom-color: var(--blue);
+    background: var(--blue-pale);
+}
+
+.admin-tab svg {
+    stroke: currentColor;
+}
+
+/* Feedback Table */
+.feedback-table-container {
+    overflow-x: auto;
+    border-radius: var(--r-md);
+    border: 2px solid var(--grey);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+}
+
+.admin-table thead {
+    background: var(--grey-light);
+    position: sticky;
+    top: 0;
+}
+
+.admin-table th {
+    padding: 14px 16px;
+    text-align: left;
+    font-family: var(--h-font);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    border-bottom: 2px solid var(--grey);
+    white-space: nowrap;
+}
+
+.admin-table td {
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    border-bottom: 1px solid var(--grey-light);
+}
+
+.admin-table tbody tr:hover {
+    background: var(--blue-pale);
+}
+
+.admin-table tbody tr:last-child td {
+    border-bottom: none;
 }
 
 .admin-header-center h1 {

@@ -143,7 +143,35 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') prevImage();
 });
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize - Load from Firebase + static images
+document.addEventListener('DOMContentLoaded', async () => {
+    let uploadedImages = [];
+
+    // Try Firebase first
+    if (typeof db !== 'undefined' && typeof storage !== 'undefined') {
+        try {
+            const snapshot = await db.collection('gallery_images')
+                .orderBy('date', 'desc')
+                .get();
+
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                uploadedImages.push({
+                    src: data.src,
+                    alt: data.name || 'Uploaded photo',
+                    category: 'uploaded'
+                });
+            });
+        } catch (error) {
+            console.error('Error loading from Firebase:', error);
+        }
+    }
+
+    // Combine uploaded + static images
+    const allImages = [...uploadedImages, ...staticGalleryImages];
+    
+    // Override the staticGalleryImages with combined list
+    window.staticGalleryImages = allImages;
+    
     renderGallery();
 });

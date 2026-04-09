@@ -376,6 +376,309 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // === PARENTS FEEDBACK SYSTEM ===
+    const feedbackFormToggle = document.getElementById('feedbackFormToggle');
+    const feedbackFormWrapper = document.getElementById('feedbackFormWrapper');
+    const feedbackForm = document.getElementById('feedbackForm');
+    const feedbackFormCancel = document.getElementById('feedbackFormCancel');
+    const ratingStars = document.querySelectorAll('.rating-star');
+    const ratingLabel = document.getElementById('ratingLabel');
+    const feedbackRating = document.getElementById('feedbackRating');
+    const feedbackDisplayGrid = document.getElementById('feedbackDisplayGrid');
+    const loadMoreFeedbackBtn = document.getElementById('loadMoreFeedbackBtn');
+    const feedbackLoadMore = document.getElementById('feedbackLoadMore');
+
+    const ratingLabels = [
+        '',
+        'Poor - Needs improvement',
+        'Fair - Below expectations',
+        'Good - Meets expectations',
+        'Very Good - Above expectations',
+        'Excellent - Outstanding!'
+    ];
+
+    // Toggle feedback form visibility
+    if (feedbackFormToggle && feedbackFormWrapper) {
+        feedbackFormToggle.addEventListener('click', () => {
+            feedbackFormWrapper.classList.toggle('active');
+            if (feedbackFormWrapper.classList.contains('active')) {
+                feedbackFormWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }
+
+    // Cancel button
+    if (feedbackFormCancel && feedbackFormWrapper) {
+        feedbackFormCancel.addEventListener('click', () => {
+            feedbackFormWrapper.classList.remove('active');
+            feedbackForm.reset();
+            resetRatingStars();
+        });
+    }
+
+    // Rating stars interaction
+    ratingStars.forEach(star => {
+        star.addEventListener('click', () => {
+            const rating = parseInt(star.dataset.rating);
+            setActiveRating(rating);
+        });
+
+        star.addEventListener('mouseenter', () => {
+            const rating = parseInt(star.dataset.rating);
+            highlightStars(rating);
+            ratingLabel.textContent = ratingLabels[rating];
+        });
+
+        star.addEventListener('mouseleave', () => {
+            const currentRating = parseInt(feedbackRating.value) || 0;
+            if (currentRating > 0) {
+                highlightStars(currentRating);
+                ratingLabel.textContent = ratingLabels[currentRating];
+            } else {
+                resetStarsHighlight();
+                ratingLabel.textContent = 'Select your rating';
+            }
+        });
+    });
+
+    function setActiveRating(rating) {
+        feedbackRating.value = rating;
+        highlightStars(rating);
+        ratingStars.forEach(s => s.classList.add('active'));
+        ratingLabel.textContent = ratingLabels[rating];
+    }
+
+    function highlightStars(count) {
+        ratingStars.forEach((star, index) => {
+            if (index < count) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+    }
+
+    function resetStarsHighlight() {
+        ratingStars.forEach(star => star.classList.remove('active'));
+    }
+
+    function resetRatingStars() {
+        feedbackRating.value = '';
+        resetStarsHighlight();
+        ratingLabel.textContent = 'Select your rating';
+    }
+
+    // Feedback form submission - Save to Firebase Firestore
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            // Validation
+            if (!data.parentName || !data.childName || !data.branch || !data.program || !data.rating || !data.category || !data.feedbackTitle || !data.feedbackText) {
+                showFormNotification('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            if (parseInt(data.rating) === 0) {
+                showFormNotification('Please select a rating.', 'error');
+                return;
+            }
+
+            // Create feedback object
+            const feedback = {
+                parentName: data.parentName.trim(),
+                childName: data.childName.trim(),
+                branch: data.branch,
+                program: data.program,
+                rating: parseInt(data.rating),
+                category: data.category,
+                feedbackTitle: data.feedbackTitle.trim(),
+                feedbackText: data.feedbackText.trim(),
+                date: new Date().toISOString(),
+                approved: true // Auto-approve for now, can add moderation later
+            };
+
+            try {
+                // Submit to Firebase Firestore
+                if (typeof db !== 'undefined') {
+                    await db.collection('parent_feedback').add(feedback);
+                    showFormNotification('Thank you for your feedback! Your voice matters to us. 🦋', 'success');
+                } else {
+                    // Fallback to localStorage if Firebase not configured
+                    const feedbacks = getStoredFeedbacks();
+                    feedbacks.unshift({ ...feedback, id: Date.now() });
+                    localStorage.setItem('cocoonz_parent_feedbacks', JSON.stringify(feedbacks));
+                    showFormNotification('Thank you for your feedback!', 'success');
+                }
+
+                // Reset form
+                this.reset();
+                resetRatingStars();
+                feedbackFormWrapper.classList.remove('active');
+
+                // Refresh feedback display
+                displayFeedbacks();
+            } catch (error) {
+                console.error('Error submitting feedback:', error);
+                showFormNotification('Oops! Something went wrong. Please try again.', 'error');
+            }
+        });
+    }
+
+    function getStoredFeedbacks() {
+        const stored = localStorage.getItem('cocoonz_parent_feedbacks');
+        return stored ? JSON.parse(stored) : [];
+    }
+
+    async function displayFeedbacks() {
+        const feedbacks = await getFeedbacks();
+
+        if (!feedbackDisplayGrid) return;
+
+        if (feedbacks.length === 0) {
+            feedbackDisplayGrid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-mid);">
+                    <div style="font-size: 3rem; margin-bottom: 16px;">💬</div>
+                    <h3 style="font-family: var(--h-font); font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--text-dark);">No feedback yet</h3>
+                    <p style="font-size: 0.95rem;">Be the first to share your experience with Cocoonz!</p>
+                </div>
+            `;
+            if (feedbackLoadMore) feedbackLoadMore.style.display = 'none';
+            return;
+        }
+
+        // Display first 6 feedbacks
+        const displayCount = Math.min(6, feedbacks.length);
+        renderFeedbackCards(feedbacks.slice(0, displayCount));
+
+        // Show/hide load more button
+        if (feedbackLoadMore) {
+            if (feedbacks.length > 6) {
+                feedbackLoadMore.style.display = 'block';
+            } else {
+                feedbackLoadMore.style.display = 'none';
+            }
+        }
+    }
+
+    async function getFeedbacks() {
+        // Try Firebase first
+        if (typeof db !== 'undefined') {
+            try {
+                const snapshot = await db.collection('parent_feedback')
+                    .where('approved', '==', true)
+                    .orderBy('date', 'desc')
+                    .get();
+
+                const feedbacks = [];
+                snapshot.forEach(doc => {
+                    feedbacks.push({ id: doc.id, ...doc.data() });
+                });
+                return feedbacks;
+            } catch (error) {
+                console.error('Error loading feedback from Firebase:', error);
+            }
+        }
+        
+        // Fallback to localStorage
+        return getStoredFeedbacks();
+    }
+
+    function renderFeedbackCards(feedbacks) {
+        if (!feedbackDisplayGrid) return;
+
+        const cardsHTML = feedbacks.map(feedback => {
+            const initials = feedback.parentName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+            const stars = '★'.repeat(feedback.rating) + '☆'.repeat(5 - feedback.rating);
+            const date = new Date(feedback.date).toLocaleDateString('en-IN', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+
+            const branchLabels = {
+                akshaya: 'Branch I – Akshaya',
+                spkovil: 'Branch II – SP Kovil',
+                maraimalai: 'Branch III – Maraimalai Nagar',
+                siruseri: 'Branch L&T – Siruseri',
+                singaperumalkoil: 'Branch V – Singaperumal Koil'
+            };
+
+            const categoryLabels = {
+                teachers: 'Teachers & Staff',
+                curriculum: 'Curriculum & Learning',
+                facilities: 'Facilities & Environment',
+                communication: 'Communication & Updates',
+                overall: 'Overall Experience',
+                improvement: 'Suggestions'
+            };
+
+            return `
+                <div class="feedback-card" data-animate>
+                    <div class="feedback-card-header">
+                        <div class="feedback-avatar">${initials}</div>
+                        <div class="feedback-author-info">
+                            <div class="feedback-author-name">${escapeHtml(feedback.parentName)}</div>
+                            <div class="feedback-child-info">Parent of ${escapeHtml(feedback.childName)}</div>
+                        </div>
+                    </div>
+                    <div class="feedback-stars">${stars}</div>
+                    <span class="feedback-category-badge">${categoryLabels[feedback.category] || feedback.category}</span>
+                    <h4 class="feedback-title">${escapeHtml(feedback.feedbackTitle)}</h4>
+                    <p class="feedback-text">${escapeHtml(feedback.feedbackText).substring(0, 200)}${feedback.feedbackText.length > 200 ? '...' : ''}</p>
+                    <div class="feedback-footer">
+                        <span class="feedback-branch">📍 ${branchLabels[feedback.branch] || feedback.branch}</span>
+                        <span class="feedback-date">${date}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        feedbackDisplayGrid.innerHTML = cardsHTML;
+
+        // Re-observe new elements
+        const animateElements = feedbackDisplayGrid.querySelectorAll('[data-animate]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
+
+        animateElements.forEach(el => observer.observe(el));
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Load more feedbacks
+    if (loadMoreFeedbackBtn) {
+        loadMoreFeedbackBtn.addEventListener('click', async () => {
+            const feedbacks = await getFeedbacks();
+            const currentCount = feedbackDisplayGrid.querySelectorAll('.feedback-card').length;
+            const nextCount = Math.min(currentCount + 6, feedbacks.length);
+
+            renderFeedbackCards(feedbacks.slice(0, nextCount));
+
+            if (nextCount >= feedbacks.length) {
+                feedbackLoadMore.style.display = 'none';
+            }
+        });
+    }
+
+    // Initialize feedback display on page load
+    displayFeedbacks();
+
     // === VIDEO LIGHTBOX ===
     const videoPlayBtn = document.getElementById('videoPlayBtn');
     const videoLightbox = document.getElementById('videoLightbox');

@@ -23,8 +23,7 @@
     <header class="header" id="header">
         <div class="container">
             <a href="#" class="logo">
-                <span class="logo-icon">🦋</span>
-                <span class="logo-text">Cocoonz</span>
+                <img src="images/cocoonz-logo.png" alt="Cocoonz" class="logo-image">
             </a>
             <nav class="nav" id="nav">
                 <a href="#about">About</a>
@@ -559,6 +558,147 @@
         </div>
     </section>
 
+    <!-- ========== PARENTS FEEDBACK SECTION ========== -->
+    <section class="feedback" id="feedback">
+        <div class="container">
+            <div class="feedback-header" data-animate>
+                <div class="section-label section-label--mint">Share Your Experience</div>
+                <h2 class="section-title text-center">Parents' <span class="highlight-mint">Feedback</span></h2>
+                <p class="feedback-subtitle">Your voice matters! Share your experience and help us grow while helping other parents make the right choice.</p>
+            </div>
+
+            <!-- Feedback Form Toggle Button -->
+            <div class="feedback-form-toggle" data-animate>
+                <button class="btn btn-mint btn-lg" id="feedbackFormToggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    <span>Share Your Feedback</span>
+                </button>
+            </div>
+
+            <!-- Feedback Form -->
+            <div class="feedback-form-wrapper" id="feedbackFormWrapper">
+                <form class="feedback-form" id="feedbackForm">
+                    <div class="feedback-form-header">
+                        <div class="feedback-form-icon">🦋</div>
+                        <h3>Tell Us About Your Experience</h3>
+                        <p>We'd love to hear how Cocoonz has made a difference for your child and family.</p>
+                    </div>
+
+                    <div class="feedback-form-grid">
+                        <div class="form-group">
+                            <label for="feedbackParentName">Your Name <span class="required">*</span></label>
+                            <input type="text" id="feedbackParentName" name="parentName" placeholder="e.g., Rajesh Kumar" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="feedbackChildName">Child's Name <span class="required">*</span></label>
+                            <input type="text" id="feedbackChildName" name="childName" placeholder="e.g., Ananya" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="feedbackBranch">Branch <span class="required">*</span></label>
+                            <select id="feedbackBranch" name="branch" required>
+                                <option value="" disabled selected>Select your branch</option>
+                                <option value="akshaya">Branch I – Akshaya</option>
+                                <option value="spkovil">Branch II – SP Kovil</option>
+                                <option value="maraimalai">Branch III – Maraimalai Nagar</option>
+                                <option value="siruseri">Branch L&T – Siruseri</option>
+                                <option value="singaperumalkoil">Branch V – Singaperumal Koil</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feedbackProgram">Program <span class="required">*</span></label>
+                            <select id="feedbackProgram" name="program" required>
+                                <option value="" disabled selected>Select program</option>
+                                <option value="prekg">Pre-KG</option>
+                                <option value="lkg">LKG</option>
+                                <option value="ukg">UKG</option>
+                                <option value="grade1">Grade 1</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Overall Rating <span class="required">*</span></label>
+                        <div class="rating-selector" id="ratingSelector">
+                            <button type="button" class="rating-star" data-rating="1" aria-label="1 star">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="rating-star" data-rating="2" aria-label="2 stars">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="rating-star" data-rating="3" aria-label="3 stars">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="rating-star" data-rating="4" aria-label="4 stars">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="rating-star" data-rating="5" aria-label="5 stars">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </button>
+                            <span class="rating-label" id="ratingLabel">Select your rating</span>
+                        </div>
+                        <input type="hidden" id="feedbackRating" name="rating" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackCategory">Category <span class="required">*</span></label>
+                        <select id="feedbackCategory" name="category" required>
+                            <option value="" disabled selected>What aspect would you like to review?</option>
+                            <option value="teachers">Teachers & Staff</option>
+                            <option value="curriculum">Curriculum & Learning</option>
+                            <option value="facilities">Facilities & Environment</option>
+                            <option value="communication">Communication & Updates</option>
+                            <option value="overall">Overall Experience</option>
+                            <option value="improvement">Suggestions for Improvement</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackTitle">Feedback Title <span class="required">*</span></label>
+                        <input type="text" id="feedbackTitle" name="feedbackTitle" placeholder="e.g., Amazing teachers and caring environment" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackText">Your Feedback <span class="required">*</span></label>
+                        <textarea id="feedbackText" name="feedbackText" rows="5" placeholder="Share your experience, what you loved, and how Cocoonz has impacted your child's journey..." required></textarea>
+                    </div>
+
+                    <div class="feedback-form-actions">
+                        <button type="button" class="btn btn-outline btn-lg" id="feedbackFormCancel">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-mint btn-lg">
+                            <span>Submit Feedback</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Feedback Display Grid -->
+            <div class="feedback-display-grid" id="feedbackDisplayGrid">
+                <!-- Feedback will be dynamically inserted here -->
+            </div>
+
+            <!-- Load More Button -->
+            <div class="feedback-load-more" id="feedbackLoadMore">
+                <button class="btn btn-outline btn-lg" id="loadMoreFeedbackBtn">
+                    <span>View More Feedback</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- ========== CTA BANNER ========== -->
     <section class="cta-banner" data-animate>
         <div class="container">
@@ -907,8 +1047,7 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <a href="#" class="logo">
-                        <span class="logo-icon">🦋</span>
-                        <span class="logo-text">Cocoonz</span>
+                        <img src="images/cocoonz-logo.png" alt="Cocoonz" class="logo-image" style="max-height: 50px;">
                     </a>
                     <p>Premium Early Childhood Development Centre. Nurturing young minds since 2015.</p>
                     <div class="footer-social">
@@ -977,6 +1116,11 @@
     </div>
 
     <!-- ========== JAVASCRIPT ========== -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

@@ -179,22 +179,37 @@ async function uploadFiles() {
 async function uploadSingleFile(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = async (e) => {
             const imageData = {
-                src: e.target.result,
                 name: file.name,
                 date: new Date().toISOString(),
                 size: file.size
             };
-            
-            let images = JSON.parse(localStorage.getItem('cocoonz_gallery_images') || '[]');
-            images.unshift(imageData);
-            
+
             try {
-                localStorage.setItem('cocoonz_gallery_images', JSON.stringify(images));
+                // Upload to Firebase Storage
+                if (typeof storage !== 'undefined') {
+                    const fileRef = storage.ref(`gallery/${Date.now()}_${file.name}`);
+                    await fileRef.putString(e.target.result, 'data_url');
+                    const downloadURL = await fileRef.getDownloadURL();
+                    imageData.src = downloadURL;
+
+                    // Save metadata to Firestore
+                    if (typeof db !== 'undefined') {
+                        await db.collection('gallery_images').add(imageData);
+                    }
+                } else {
+                    // Fallback to localStorage
+                    imageData.src = e.target.result;
+                    let images = JSON.parse(localStorage.getItem('cocoonz_gallery_images') || '[]');
+                    images.unshift(imageData);
+                    localStorage.setItem('cocoonz_gallery_images', JSON.stringify(images));
+                }
+
                 resolve(imageData);
             } catch (error) {
-                alert('Storage full! Please delete some photos or use server storage.');
+                console.error('Upload failed:', error);
+                alert('Upload failed! Please check your connection and try again.');
                 reject(error);
             }
         };
@@ -204,12 +219,32 @@ async function uploadSingleFile(file) {
 }
 
 // Load and display gallery images
-function loadGalleryImages() {
+async function loadGalleryImages() {
     const grid = document.getElementById('adminGalleryGrid');
     const photoCount = document.getElementById('photoCount');
-    
-    let images = JSON.parse(localStorage.getItem('cocoonz_gallery_images') || '[]');
-    
+
+    let uploadedImages = [];
+
+    // Try Firebase first
+    if (typeof db !== 'undefined' && typeof storage !== 'undefined') {
+        try {
+            const snapshot = await db.collection('gallery_images')
+                .orderBy('date', 'desc')
+                .get();
+
+            snapshot.forEach(doc => {
+                uploadedImages.push({ id: doc.id, ...doc.data() });
+            });
+        } catch (error) {
+            console.error('Error loading from Firebase:', error);
+            // Fallback to localStorage
+            uploadedImages = JSON.parse(localStorage.getItem('cocoonz_gallery_images') || '[]');
+        }
+    } else {
+        // Fallback to localStorage
+        uploadedImages = JSON.parse(localStorage.getItem('cocoonz_gallery_images') || '[]');
+    }
+
     const staticImages = [
         { src: 'images/01e28409-d3ee-4659-b502-e17d1b995478.jpg', name: 'Children at play' },
         { src: 'images/0fc3fd66-75b1-4576-bc10-16b5b2e8d822.jpg', name: 'Learning activities' },
@@ -238,21 +273,21 @@ function loadGalleryImages() {
         { src: 'images/ffdc7c51-0cfc-47eb-9ae4-dfa8a6a30282.jpg', name: 'Sports day' },
         { src: 'images/image_1775478456614.jpg', name: 'Campus life' }
     ];
-    
-    const allImages = [...images, ...staticImages.map(img => ({...img, date: '2026-01-01', size: 0}))];
-    
+
+    const allImages = [...uploadedImages, ...staticImages.map(img => ({...img, date: '2026-01-01', size: 0}))];
+
     photoCount.textContent = `(${allImages.length} photos)`;
-    
+
     if (allImages.length === 0) {
         grid.innerHTML = '<p style="text-align: center; color: var(--text-light); grid-column: 1/-1;">No photos yet. Upload some above!</p>';
         return;
     }
-    
+
     grid.innerHTML = allImages.map((img, index) => `
         <div class="admin-photo-card">
             <img src="${img.src}" alt="${img.name || 'Gallery photo'}" loading="lazy">
             <div class="admin-photo-actions">
-                <button class="btn-delete-photo" data-index="${index}" data-src="${img.src}">
+                <button class="btn-delete-photo" data-index="${index}" data-id="${img.id || ''}" data-src="${img.src}">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                     </svg>
@@ -261,22 +296,77 @@ function loadGalleryImages() {
             </div>
         </div>
     `).join('');
-    
+
     document.querySelectorAll('.btn-delete-photo').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', async (e) => {
             const src = e.currentTarget.dataset.src;
+            const id = e.currentTarget.dataset.id;
             if (confirm('Are you sure you want to delete this photo?')) {
-                deletePhoto(src);
+                await deletePhoto(src, id);
             }
         });
     });
 }
 
-function deletePhoto(src) {
-    let images = JSON.parse(localStorage.getItem('cocoonz_gallery_images') || '[]');
-    images = images.filter(img => img.src !== src);
-    localStorage.setItem('cocoonz_gallery_images', JSON.stringify(images));
-    loadGalleryImages();
+async function deletePhoto(src, id) {
+    try {
+        // Delete from Firebase if present
+        if (id && typeof storage !== 'undefined') {
+            try {
+                const fileRef = storage.refFromURL(src);
+                await fileRef.delete();
+            } catch (error) {
+                console.error('Error deleting from Storage:', error);
+            }
+
+            if (typeof db !== 'undefined') {
+                await db.collection('gallery_images').doc(id).delete();
+            }
+        } else {
+            // Delete from localStorage
+            let images = JSON.parse(localStorage.getItem('cocoonz_gallery_images') || '[]');
+            images = images.filter(img => img.src !== src);
+            localStorage.setItem('cocoonz_gallery_images', JSON.stringify(images));
+        }
+
+        loadGalleryImages();
+        showAdminNotification('Photo deleted successfully', 'success');
+    } catch (error) {
+        console.error('Error deleting photo:', error);
+        showAdminNotification('Error deleting photo', 'error');
+    }
+}
+
+function showAdminNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 90px;
+        right: 24px;
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        z-index: 3000;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        transform: translateX(120%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        max-width: 350px;
+        background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+        color: white;
+    `;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    requestAnimationFrame(() => {
+        notification.style.transform = 'translateX(0)';
+    });
+
+    setTimeout(() => {
+        notification.style.transform = 'translateX(120%)';
+        setTimeout(() => notification.remove(), 400);
+    }, 4000);
 }
 
 document.getElementById('refreshGallery').addEventListener('click', loadGalleryImages);
